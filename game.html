@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Penalty King - FERTOOZ</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .game-area {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .goal {
+      font-size: 4rem;
+      margin: 20px 0;
+    }
+    .directions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 30px 0;
+    }
+    .dir-btn {
+      width: 90px;
+      height: 90px;
+      border-radius: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .dir-btn:active {
+      border-color: var(--gold);
+      background: #1a1800;
+    }
+    .score-board {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+    .result {
+      font-size: 1.3rem;
+      font-weight: 700;
+      min-height: 40px;
+      margin: 16px 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">Penalty King</div>
+    <a href="predictions.html" style="color:var(--muted);font-size:0.9rem;">إغلاق</a>
+  </header>
+
+  <main class="main-content">
+    <div class="game-area">
+      <div class="score-board">الأهداف: <span id="goals">0</span> | المحاولات: <span id="attempts">0</span></div>
+      <div class="goal">🥅</div>
+      <div class="result" id="result">اختار اتجاه التسديدة</div>
+
+      <div class="directions">
+        <button class="dir-btn" onclick="shoot('left')">↖️<br>شمال عالي</button>
+        <button class="dir-btn" onclick="shoot('center')">⬆️<br>وسط</button>
+        <button class="dir-btn" onclick="shoot('right')">↗️<br>يمين عالي</button>
+        <button class="dir-btn" onclick="shoot('bottom-left')">↙️<br>شمال واطي</button>
+        <button class="dir-btn" onclick="shoot('bottom-right')">↘️<br>يمين واطي</button>
+      </div>
+
+      <p style="color:var(--muted);font-size:0.9rem;">كل هدف صحيح = +5 نقط</p>
+    </div>
+  </main>
+
+  <script>
+    let goals = 0;
+    let attempts = 0;
+
+    function shoot(dir) {
+      attempts++;
+      document.getElementById('attempts').textContent = attempts;
+
+      const directions = ['left', 'center', 'right', 'bottom-left', 'bottom-right'];
+      const keeper = directions[Math.floor(Math.random() * directions.length)];
+
+      if (dir !== keeper) {
+        goals++;
+        document.getElementById('goals').textContent = goals;
+        document.getElementById('result').textContent = '⚽ جوووووول!';
+        document.getElementById('result').style.color = '#0f9b6e';
+      } else {
+        document.getElementById('result').textContent = '🧤 الحارس تصدى!';
+        document.getElementById('result').style.color = '#e74c3c';
+      }
+    }
+  </script>
+</body>
+</html>
